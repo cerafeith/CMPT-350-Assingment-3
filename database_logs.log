@@ -1,0 +1,25 @@
+create table users
+(
+    id       uuid primary key,
+    username varchar not null
+);
+
+create table rooms
+(
+    id   uuid primary key,
+    name varchar not null
+);
+
+create table room_users
+(
+    room_id uuid references rooms(id),
+    user_id uuid references users(id)
+);
+
+create table messages
+(
+    id uuid primary key,
+    room_id uuid references rooms(id),
+    user_id uuid references users(id),
+    message varchar not null
+);
