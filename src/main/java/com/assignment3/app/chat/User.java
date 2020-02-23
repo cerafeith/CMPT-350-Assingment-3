@@ -1,5 +1,6 @@
 package com.assignment3.app.chat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,10 +23,8 @@ public class User {
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @ManyToMany
-    @JoinTable(name = "rooms_users",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "room_id", referencedColumnName = "id")})
+    @JsonBackReference
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
     Set<Room> rooms = new HashSet<>();
 
 }
