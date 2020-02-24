@@ -5,6 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/chat")
 public class ChatController {
@@ -38,11 +41,19 @@ public class ChatController {
         this.chatService.joinOrLeaveRoom(userRooms, false);
     }
 
+    @GetMapping("/all-rooms")
+    @ResponseBody
+    public List<Room> getAllRooms() { return this.chatService.getAllRooms(); }
+
     @PostMapping("/save-message")
     @ResponseStatus(code = HttpStatus.OK)
     public void saveMessage(@RequestBody Message message) {
         this.chatService.saveMessage(message);
     }
+
+    @GetMapping("/get-messages/{roomId}")
+    @ResponseBody
+    public List<Message> getMessagesByRoomId(@PathVariable UUID roomId) {return this.chatService.getMessagesByRoomId(roomId);}
 
     @GetMapping("/get-user/{username}")
     @ResponseBody

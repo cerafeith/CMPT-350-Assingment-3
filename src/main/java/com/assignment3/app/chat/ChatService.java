@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class ChatService {
@@ -36,8 +35,16 @@ public class ChatService {
         this.roomRepository.save(room);
     }
 
+    List<Room> getAllRooms() {
+        return this.roomRepository.findAll();
+    }
+
     void saveMessage(Message message) {
         this.messageRepository.save(message);
+    }
+
+    List<Message> getMessagesByRoomId(UUID id) {
+        return this.messageRepository.findMessagesByRoomId(id);
     }
 
     Optional<User> getUserByUsername(String username) {
