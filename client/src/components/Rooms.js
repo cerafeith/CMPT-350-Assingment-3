@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import history from "../utilities/history";
 
 function Rooms() {
   const [rooms, setRooms] = useState([]);
