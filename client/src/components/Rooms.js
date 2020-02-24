@@ -1,15 +1,11 @@
 import React from "react";
 
 function Rooms({ profile }) {
-  if(!profile) {
+  if (!profile) {
     return null;
   }
 
-  return (
-    <div>
-      Rooms
-    </div>
-  );
+  return <div>Rooms</div>;
 }
 
 export default Rooms;

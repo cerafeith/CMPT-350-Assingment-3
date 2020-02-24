@@ -1,11 +1,25 @@
 import React from "react";
 import history from "../utilities/history";
 
-function SetUsername({ setProfile }) {
+function CreateUser({ setProfile }) {
   async function submit(event) {
     event.preventDefault();
 
     const username = event.target.username.value;
+
+    try {
+      await fetch(`/chat/save-user`, {
+        method: "POST",
+        body: JSON.stringify({
+          username
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+    } catch (e) {
+      // IF user already exists, then ignore
+    }
 
     const resp = await fetch(`/chat/get-user/${username}`);
     const json = await resp.json();
@@ -17,7 +31,7 @@ function SetUsername({ setProfile }) {
 
   return (
     <div>
-      <h2>Set User</h2>
+      <h2>Create A Profile</h2>
       <form onSubmit={submit}>
         <div>
           <label>Username: </label>
@@ -29,4 +43,4 @@ function SetUsername({ setProfile }) {
   );
 }
 
-export default SetUsername;
+export default CreateUser;

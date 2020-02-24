@@ -22,15 +22,17 @@ public class ChatService {
     }
 
     void saveUser(User user) {
-        this.userRepository.findByUsername(user.getUsername())
-                .orElseThrow(() -> new IllegalArgumentException("User already exists"));
+        if(this.userRepository.findByUsername(user.getUsername()).isPresent()) {
+            throw  new IllegalArgumentException("User already exists");
+        }
 
         this.userRepository.save(user);
     }
 
     void saveRoom(Room room) {
-        this.roomRepository.findByName(room.getName())
-                .orElseThrow(() -> new IllegalArgumentException("Room Name already exists"));
+        if(this.roomRepository.findByName(room.getName()).isPresent()) {
+            throw new IllegalArgumentException("Room Name already exists");
+        }
         this.roomRepository.save(room);
     }
 

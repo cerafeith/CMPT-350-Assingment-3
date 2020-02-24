@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import history from "./history";
 
 export function useProfile() {
-  const initialState = () => JSON.parse(window.localStorage.getItem("profile") || null);
+  const initialState = () =>
+    JSON.parse(window.localStorage.getItem("profile") || null);
 
   const [profile, setProfile] = useState(initialState);
 
@@ -10,7 +12,11 @@ export function useProfile() {
   }
 
   function clearProfile() {
-    setProfile(null);
+    if (window.confirm("Are you sure you want to logout?")) {
+      setProfile(null);
+
+      history.push("/set-profile");
+    }
   }
 
   useEffect(

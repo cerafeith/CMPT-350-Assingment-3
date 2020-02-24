@@ -26,5 +26,4 @@ public class User {
     @JsonBackReference
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
     Set<Room> rooms = new HashSet<>();
-
 }
