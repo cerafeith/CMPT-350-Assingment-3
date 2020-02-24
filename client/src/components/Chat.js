@@ -28,6 +28,8 @@ function Chat({ profile }) {
         "Content-Type": "application/json"
       }
     });
+    const form = document.getElementById("form");
+    form.reset();
     await fetchMessages();
   }
 
@@ -55,7 +57,7 @@ function Chat({ profile }) {
     <div>
       <h2>Messages</h2>
       {renderMessages()}
-      <form onSubmit={submit}>
+      <form id="form" onSubmit={submit}>
         <div>
           <input type="text" name="message" />
         </div>

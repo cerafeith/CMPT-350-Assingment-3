@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import history from "../utilities/history";
 
 function Rooms() {
   const [rooms, setRooms] = useState([]);
@@ -9,6 +10,27 @@ function Rooms() {
     const json = await resp.json();
 
     setRooms(json);
+  }
+
+  async function submit(event) {
+    event.preventDefault();
+
+    const name = event.target.name.value;
+
+    try {
+      await fetch(`/chat/save-room`, {
+        method: "POST",
+        body: JSON.stringify({
+          name
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+    } catch (e) {
+      // IF room already exists, then ignore
+    }
+    await fetchRooms();
   }
 
   useEffect(() => {
@@ -33,6 +55,13 @@ function Rooms() {
     <div>
       <h2>Rooms To Join</h2>
       {renderRooms()}
+      <form onSubmit={submit}>
+        <div>
+          <label>New Chatroom: </label>
+          <input type="text" name="name" />
+        </div>
+        <button type="submit">Submit</button>
+      </form>
     </div>
   );
 }
