@@ -23,7 +23,7 @@ function Rooms() {
     return rooms.map(room => {
       return (
         <div key={room.id}>
-          <Link>{room.name}</Link>
+          <Link to={`/rooms/${room.id}`}>{room.name}</Link>
         </div>
       );
     });

@@ -4,6 +4,7 @@ import SetUsername from "./components/SetUsername";
 import { useProfile } from "./utilities/profile";
 import history from "./utilities/history";
 import Rooms from "./components/Rooms";
+import Chat from "./components/Chat";
 import CreateUser from "./components/CreateUser";
 
 function App() {
@@ -43,11 +44,11 @@ function App() {
           <Route path="/set-profile">
             <SetUsername setProfile={setProfile} />
           </Route>
-          <Route path="/rooms">
-            <Rooms profile={profile} />
+          <Route path="/rooms" exact>
+            <Rooms />
           </Route>
-          <Route path="/rooms">
-            <Rooms profile={profile} />
+          <Route path="/rooms/:id" exact>
+            <Chat profile={profile} />
           </Route>
         </Switch>
       </Router>
