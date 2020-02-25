@@ -29,6 +29,8 @@ function Rooms() {
     } catch (e) {
       // IF room already exists, then ignore
     }
+    const form = document.getElementById("form");
+    form.reset();
     await fetchRooms();
   }
 
@@ -54,7 +56,7 @@ function Rooms() {
     <div>
       <h2>Rooms To Join</h2>
       {renderRooms()}
-      <form onSubmit={submit}>
+      <form id="form" onSubmit={submit}>
         <div>
           <label>New Chatroom: </label>
           <input type="text" name="name" />
